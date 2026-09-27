@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Calculateur TS - UNSA</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #061b45, #008cff);
+    color: white;
+    padding: 25px 15px;
+}
+
+.container {
+    max-width: 520px;
+    margin: auto;
+    background: rgba(5, 20, 50, 0.92);
+    border: 2px solid #20bfff;
+    border-radius: 25px;
+    padding: 30px 25px 40px;
+    box-shadow: 0 0 30px rgba(0, 180, 255, 0.35);
+}
+
+.logo {
+    width: 105px;
+    height: 105px;
+    border-radius: 50%;
+    margin: 0 auto 20px;
+
+    background: linear-gradient(135deg, #16b9ff, #0065c9);
+    border: 3px solid white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 30px;
+    font-weight: bold;
+}
+
+h1 {
+    text-align: center;
+    font-size: 34px;
+    font-weight: 500;
+    margin-bottom: 40px;
+}
+
+label {
+    display: block;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.champ {
+    margin-bottom: 25px;
+}
+
+input,
+select {
+    width: 100%;
+    height: 60px;
+
+    border: 2px solid #cfeaff;
+    border-radius: 10px;
+
+    background: #17243a;
+    color: white;
+
+    padding: 0 17px;
+    font-size: 20px;
+}
+
+input:focus,
+select:focus {
+    outline: none;
+    border-color: #20c5ff;
+}
+
+button {
+    width: 100%;
+    height: 62px;
+
+    margin-top: 10px;
+
+    border: none;
+    border-radius: 12px;
+
+    background: #09c8e8;
+    color: white;
+
+    font-size: 21px;
+    font-weight: bold;
+    letter-spacing: 3px;
+
+    cursor: pointer;
+
+    box-shadow: 0 0 25px rgba(0, 220, 255, 0.65);
+}
+
+button:hover {
+    background: #08b5d2;
+}
+
+.resultat {
+    display: none;
+
+    margin-top: 25px;
+    padding: 22px;
+
+    background: linear-gradient(135deg, #d9ffe9, #b7f4e5);
+    color: #176b3a;
+
+    border-radius: 12px;
+
+    text-align: center;
+    font-size: 20px;
+}
+
+.resultat strong {
+    font-size: 30px;
+}
+
+.info {
+    margin-top: 18px;
+    text-align: center;
+    font-size: 13px;
+    color: #b9d7ee;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="logo">
+        UNSA
+    </div>
+
+    <h1>Calculer votre TS</h1>
+
+    <div class="champ">
+        <label>TS (min) :</label>
+        <input
+            type="number"
+            id="minutes"
+            value="2000"
+            min="0"
+        >
+    </div>
+
+    <div class="champ">
+        <label>BC :</label>
+        <select id="bc">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+    </div>
+
+    <div class="champ">
+        <label>Échelon :</label>
+        <select id="echelon">
+            <option value="1">1</option>
+            <option value="2" selected>2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+        </select>
+    </div>
+
+    <div class="champ">
+        <label>Compensation :</label>
+        <select id="compensation">
+            <option value="oui">OUI</option>
+            <option value="non">NON</option>
+        </select>
+    </div>
+
+    <div class="champ">
+        <label>Prix à la minute (€) :</label>
+        <input
+            type="number"
+            id="prixMinute"
+            value="0.338625"
+            step="0.000001"
+            min="0"
+        >
+    </div>
+
+    <div id="resultat" class="resultat"></div>
+
+    <button onclick="calculer()">
+        VALIDER
+    </button>
+
+    <div class="info">
+        Calculateur TS - UNSA
+    </div>
+
+</div>
+
+<script>
+
+function calculer() {
+
+    const minutes =
+        Number(document.getElementById("minutes").value);
+
+    const prixMinute =
+        Number(document.getElementById("prixMinute").value);
+
+    if (minutes < 0 || prixMinute < 0) {
+
+        alert("Veuillez saisir des valeurs positives.");
+
+        return;
+    }
+
+    /* Calcul du montant */
+
+    const montant = minutes * prixMinute;
+
+    /* Conversion des minutes en heures */
+
+    const heures = Math.floor(minutes / 60);
+
+    const minutesRestantes = minutes % 60;
+
+    let temps;
+
+    if (minutesRestantes === 0) {
+
+        temps = heures + " h";
+
+    } else {
+
+        temps = heures + " h " +
+                minutesRestantes + " min";
+    }
+
+    /* Récupération des informations */
+
+    const bc =
+        document.getElementById("bc").value;
+
+    const echelon =
+        document.getElementById("echelon").value;
+
+    const compensation =
+        document.getElementById("compensation").value;
+
+    /* Affichage du résultat */
+
+    const resultat =
+        document.getElementById("resultat");
+
+    resultat.style.display = "block";
+
+    resultat.innerHTML =
+
+        "Pour <strong>" +
+        minutes +
+        "</strong> minutes<br>" +
+
+        "soit <strong>" +
+        temps +
+        "</strong><br><br>" +
+
+        "vous percevrez<br>" +
+
+        "<strong>" +
+        montant.toFixed(2) +
+        " €</strong>" +
+
+        "<br><br>" +
+
+        "<small>" +
+        "BC : " + bc +
+        " &nbsp; | &nbsp; " +
+        "Échelon : " + echelon +
+        " &nbsp; | &nbsp; " +
+        "Compensation : " + compensation.toUpperCase() +
+        "</small>";
+}
+
+</script>
+
+</body>
+</html>
