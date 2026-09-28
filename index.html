@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -213,7 +212,7 @@ footer{text-align:center;padding:25px;color:#56718f;font-size:13px}
         <div class="big-icon">▦</div><h2>Vos informations</h2>
       </div>
 
-      <div class="notice">ⓘ &nbsp;Le calcul est basé sur la grille de rémunération applicable selon votre BC, échelon et le choix de compensation.</div>
+      <div class="notice">ⓘ &nbsp;Le calcul utilise la grille 2025 et applique la règle TS avec ou sans compensation selon le niveau sélectionné.</div>
 
       <div class="field">
         <label><span class="fi">◷</span>TS (minutes) *</label>
@@ -256,7 +255,7 @@ footer{text-align:center;padding:25px;color:#56718f;font-size:13px}
 
       <div class="know">
         <div class="know-icon">ⓘ</div>
-        <div><strong>À savoir</strong><br>Le calcul est basé sur la grille de rémunération applicable selon votre BC, échelon et le choix de compensation.</div>
+        <div><strong>À savoir</strong><br>Le calcul utilise la grille 2025 et applique la règle TS avec ou sans compensation selon le niveau sélectionné.</div>
       </div>
     </section>
   </div>
@@ -271,138 +270,129 @@ footer{text-align:center;padding:25px;color:#56718f;font-size:13px}
 <footer>Calculateur TS – UNSA Mobilités</footer>
 
 <script>
-/*
-  VERSION TEST
-  Tarifs confirmés actuellement.
-  Chaque tarif correspond à 1 minute.
-  Les combinaisons non encore confirmées restent volontairement absentes.
-*/
-const tarifs = {
-  1:{
-    2:{oui:0.34,non:0.29},
-    3:{oui:0.34,non:0.29},
-    4:{oui:0.35,non:0.30},
-    5:{oui:0.35,non:0.30},
-    6:{oui:0.36,non:0.31},
-    7:{oui:0.36,non:0.31},
-    8:{oui:0.37,non:0.32}
-  },
-  2:{
-    2:{oui:0.35,non:0.30},
-    3:{oui:0.35,non:0.30},
-    4:{oui:0.36,non:0.31},
-    5:{oui:0.36,non:0.31},
-    6:{oui:0.37,non:0.32},
-    7:{oui:0.37,non:0.32},
-    8:{oui:0.38,non:0.33}
-  },
-
-  /* Tarifs ponctuellement confirmés précédemment */
-  3:{2:{oui:0.35,non:0.30}},
-  4:{2:{oui:0.37,non:0.32},11:{oui:0.41,non:0.36}},
-  5:{2:{oui:0.38,non:0.33},11:{oui:0.42,non:0.38}},
-  6:{3:{oui:0.39,non:0.34},11:{oui:0.43,non:0.38}},
-  7:{4:{oui:0.40,non:0.35},11:{oui:0.44,non:0.39}},
-  8:{4:{oui:0.41,non:0.36},11:{oui:0.46,non:0.41}}
+/* Grille 2025 : prix de la minute brute lus sur la grille fournie. */
+const baseRates = {
+  "BC1": {2:.2452,3:.2493,4:.2534,5:.2575,6:.2615,7:.2656,8:.2697,9:.2779,10:.2820,11:.2860,12:.2902,13:.2942,14:.2983,16:.3024,"26 ans":.3065,"28 ans":.3106,"30 ans":.3147},
+  "BC2": {2:.2525,3:.2567,4:.2609,5:.2652,6:.2694,7:.2736,8:.2778,9:.2862,10:.2905,11:.2947,12:.2988,13:.3030,14:.3071,16:.3115,"26 ans":.3157,"28 ans":.3199,"30 ans":.3241},
+  "BC3": {2:.2601,3:.2644,4:.2687,5:.2731,6:.2774,7:.2817,8:.2860,9:.2947,10:.2991,11:.3034,12:.3078,13:.3121,14:.3165,16:.3207,"26 ans":.3251,"28 ans":.3294,"30 ans":.3338},
+  "BC4": {2:.2675,3:.2720,4:.2764,5:.2809,6:.2853,7:.2898,8:.2942,9:.3032,10:.3076,11:.3121,12:.3165,13:.3210,14:.3254,16:.3299,"26 ans":.3344,"28 ans":.3388,"30 ans":.3433},
+  "BC5": {2:.2750,3:.2796,4:.2842,5:.2888,6:.2933,7:.2979,8:.3025,9:.3117,10:.3162,11:.3209,12:.3254,13:.3300,14:.3345,16:.3392,"26 ans":.3437,"28 ans":.3483,"30 ans":.3528},
+  "BC5 M2R": {2:.2787,3:.2833,4:.2880,5:.2926,6:.2972,7:.3019,8:.3066,9:.3158,10:.3205,11:.3251,12:.3298,13:.3344,14:.3390,16:.3437,"26 ans":.3484,"28 ans":.3530,"30 ans":.3577},
+  "BC6 M2R": {3:.2850,4:.2898,5:.2945,6:.2993,7:.3040,8:.3088,9:.3183,10:.3230,11:.3278,12:.3325,13:.3373,14:.3420,16:.3468,"26 ans":.3515,"28 ans":.3563,"30 ans":.3610},
+  "BC7 M2R": {4:.2959,5:.3008,6:.3058,7:.3107,8:.3156,9:.3255,10:.3304,11:.3354,12:.3403,13:.3452,14:.3501,16:.3551,"26 ans":.3600,"28 ans":.3649,"30 ans":.3699},
+  "BC8 M2R": {4:.3057,5:.3108,6:.3158,7:.3210,8:.3261,9:.3362,10:.3414,11:.3465,12:.3515,13:.3566,14:.3617,16:.3669,"26 ans":.3719,"28 ans":.3770,"30 ans":.3821},
+  "BC8 +5": {4:.3094,5:.3145,6:.3195,7:.3247,8:.3298,9:.3399,10:.3451,11:.3502,12:.3552,13:.3603,14:.3654,16:.3705,"26 ans":.3756,"28 ans":.3807,"30 ans":.3858}
 };
 
 const bc = document.getElementById("bc");
 const echelon = document.getElementById("echelon");
 
-for(let i=1;i<=8;i++){
-  const option=document.createElement("option");
-  option.value=i;
-  option.textContent="BC "+i;
+Object.keys(baseRates).forEach(name => {
+  const option = document.createElement("option");
+  option.value = name;
+  option.textContent = name;
   bc.appendChild(option);
-}
-
-bc.addEventListener("change",()=>{
-  const value=bc.value;
-  echelon.innerHTML="";
-  echelon.disabled=true;
-
-  if(!value){
-    echelon.innerHTML='<option value="">Sélectionnez votre échelon</option>';
-    return;
-  }
-
-  const echelons=Object.keys(tarifs[value]||{}).map(Number).sort((a,b)=>a-b);
-
-  if(!echelons.length){
-    echelon.innerHTML='<option value="">Tarifs à définir</option>';
-    return;
-  }
-
-  echelon.innerHTML='<option value="">Sélectionnez votre échelon</option>';
-  echelons.forEach(e=>{
-    const option=document.createElement("option");
-    option.value=e;
-    option.textContent="Échelon "+e;
-    echelon.appendChild(option);
-  });
-  echelon.disabled=false;
 });
 
-function formatEuro(n){
-  return n.toLocaleString("fr-FR",{minimumFractionDigits:2,maximumFractionDigits:2})+" €";
+bc.addEventListener("change", () => {
+  echelon.innerHTML = '<option value="">Sélectionnez votre échelon</option>';
+  echelon.disabled = true;
+  const data = baseRates[bc.value];
+  if (!data) return;
+
+  Object.keys(data).forEach(level => {
+    const option = document.createElement("option");
+    option.value = level;
+    option.textContent = String(level).includes("ans") ? level : "Échelon " + level;
+    echelon.appendChild(option);
+  });
+  echelon.disabled = false;
+});
+
+/*
+  Règle TS confirmée par les exemples que tu m'as donnés :
+  - sans compensation : minute brute + 0,045 €
+  - avec compensation : minute brute + 0,095 €
+  Puis arrondi au centime.
+  Exemple BC1 échelon 2 : 0,2452 + 0,045 = 0,2902 -> 0,29
+  Avec compensation : 0,2452 + 0,095 = 0,3402 -> 0,34
+*/
+function arrondi2(n) {
+  return Math.round((n + Number.EPSILON) * 100) / 100;
 }
 
-function formatRate(n){
-  return n.toLocaleString("fr-FR",{minimumFractionDigits:2,maximumFractionDigits:6})+" €/min";
+function tarifTS(minuteBrute, compensation) {
+  return arrondi2(minuteBrute + (compensation === "oui" ? 0.095 : 0.045));
 }
 
-function formatHours(minutes){
-  const h=Math.floor(minutes/60);
-  const m=minutes%60;
-  return h+" h "+m.toString().padStart(2,"0")+" min";
+function euro(n) {
+  return n.toLocaleString("fr-FR", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  }) + " €";
 }
 
-function calculer(){
-  const minutes=Number(document.getElementById("minutes").value);
-  const bcValue=bc.value;
-  const echelonValue=echelon.value;
-  const compensation=document.getElementById("compensation").value;
-  const error=document.getElementById("error");
+function tarifTexte(n) {
+  return n.toLocaleString("fr-FR", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  }) + " €/min";
+}
 
-  error.textContent="";
+function heures(minutes) {
+  const h = Math.floor(minutes / 60);
+  const m = minutes % 60;
+  return h + " h " + String(m).padStart(2, "0") + " min";
+}
 
-  if(!Number.isInteger(minutes)||minutes<=0){
-    error.textContent="Veuillez saisir un nombre entier de minutes supérieur à 0.";
+function calculer() {
+  const minutes = Number(document.getElementById("minutes").value);
+  const bcValue = bc.value;
+  const echelonValue = echelon.value;
+  const compensation = document.getElementById("compensation").value;
+  const error = document.getElementById("error");
+
+  error.textContent = "";
+
+  if (!Number.isInteger(minutes) || minutes <= 0) {
+    error.textContent = "Veuillez saisir un nombre entier de minutes supérieur à 0.";
     return;
   }
-  if(!bcValue||!echelonValue||!compensation){
-    error.textContent="Veuillez remplir tous les champs.";
+
+  if (!bcValue || !echelonValue || !compensation) {
+    error.textContent = "Veuillez remplir tous les champs.";
     return;
   }
 
-  const tarif=tarifs[bcValue]?.[echelonValue]?.[compensation];
+  const minuteBrute = baseRates[bcValue]?.[echelonValue];
 
-  if(typeof tarif!=="number"){
-    error.textContent="Le tarif de cette combinaison n'est pas encore renseigné.";
+  if (typeof minuteBrute !== "number") {
+    error.textContent = "Tarif indisponible pour cette combinaison.";
     return;
   }
 
-  const montant=minutes*tarif;
+  const tarif = tarifTS(minuteBrute, compensation);
+  const montant = minutes * tarif;
 
-  document.getElementById("amount").textContent=formatEuro(montant);
-  document.getElementById("rAmount").textContent=formatEuro(montant);
-  document.getElementById("rMinutes").textContent=minutes.toLocaleString("fr-FR")+" min";
-  document.getElementById("rHours").textContent=formatHours(minutes);
-  document.getElementById("rate").textContent=formatRate(tarif);
+  document.getElementById("amount").textContent = euro(montant);
+  document.getElementById("rMinutes").textContent = minutes.toLocaleString("fr-FR") + " min";
+  document.getElementById("rHours").textContent = heures(minutes);
+  document.getElementById("rate").textContent = tarifTexte(tarif);
+  document.getElementById("rAmount").textContent = euro(montant);
 }
 
-function resetForm(){
-  document.getElementById("minutes").value="";
-  bc.value="";
-  echelon.innerHTML='<option value="">Sélectionnez votre échelon</option>';
-  echelon.disabled=true;
-  document.getElementById("compensation").value="";
-  document.getElementById("error").textContent="";
-  document.getElementById("amount").textContent="- €";
-  document.getElementById("rMinutes").textContent="- min";
-  document.getElementById("rHours").textContent="- h - min";
-  document.getElementById("rate").textContent="- €/min";
-  document.getElementById("rAmount").textContent="- €";
+function resetForm() {
+  document.getElementById("minutes").value = "";
+  bc.value = "";
+  echelon.innerHTML = '<option value="">Sélectionnez votre échelon</option>';
+  echelon.disabled = true;
+  document.getElementById("compensation").value = "";
+  document.getElementById("error").textContent = "";
+  document.getElementById("amount").textContent = "- €";
+  document.getElementById("rMinutes").textContent = "- min";
+  document.getElementById("rHours").textContent = "- h - min";
+  document.getElementById("rate").textContent = "- €/min";
+  document.getElementById("rAmount").textContent = "- €";
 }
 </script>
 </body>
