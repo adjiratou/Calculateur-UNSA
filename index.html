@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Calculateur TS – UNSA Mobilités</title>
+
 <style>
 :root{
   --blue:#0068c9;
@@ -16,401 +17,1542 @@
   --white:#fff;
   --border:#d9e8f6;
 }
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
 body{
   margin:0;
   font-family:Arial,Helvetica,sans-serif;
   color:var(--text);
   background:
-    radial-gradient(circle at 0 35%,rgba(0,145,240,.18),transparent 28%),
+    radial-gradient(circle at 0% 35%,rgba(0,145,240,.18),transparent 28%),
     radial-gradient(circle at 100% 55%,rgba(0,120,230,.20),transparent 30%),
     linear-gradient(180deg,#dff1ff 0%,#f7fbff 55%,#e5f3ff 100%);
 }
-body:before,body:after{
-  content:"";position:fixed;z-index:-1;border-radius:50%;
-  filter:blur(1px);pointer-events:none
+
+/* MOTIFS BLEUS DU FOND */
+
+body:before,
+body:after{
+  content:"";
+  position:fixed;
+  z-index:-1;
+  border-radius:50%;
+  pointer-events:none;
 }
+
 body:before{
-  width:720px;height:720px;left:-440px;top:80px;
+  width:720px;
+  height:720px;
+  left:-440px;
+  top:80px;
   background:linear-gradient(145deg,#0076d9,#8ad8ff);
 }
+
 body:after{
-  width:650px;height:650px;right:-390px;top:300px;
+  width:650px;
+  height:650px;
+  right:-390px;
+  top:300px;
   background:linear-gradient(145deg,#0a78dc,#82dcff);
 }
+
+/* HEADER */
+
 header{
   background:linear-gradient(110deg,#00427f,#006fcf);
-  color:#fff;position:sticky;top:0;z-index:20;
+  color:white;
+  position:sticky;
+  top:0;
+  z-index:20;
   border-radius:0 0 16px 16px;
   box-shadow:0 5px 18px rgba(0,55,115,.18);
 }
+
 .nav{
-  max-width:1260px;height:92px;margin:auto;padding:0 24px;
-  display:flex;align-items:center;gap:28px
+  max-width:1260px;
+  height:92px;
+  margin:auto;
+  padding:0 24px;
+  display:flex;
+  align-items:center;
+  gap:28px;
 }
-.brand{display:flex;align-items:center;min-width:290px}
-.brand img{width:112px;height:82px;object-fit:contain;object-position:center;margin-top:10px;filter:drop-shadow(0 3px 4px rgba(0,0,0,.15))}
-.brand-text{font-size:18px;font-weight:800;line-height:1.05;margin-left:8px}
+
+.brand{
+  display:flex;
+  align-items:center;
+  min-width:290px;
+}
+
+.brand img{
+  width:112px;
+  height:82px;
+  object-fit:contain;
+  object-position:center;
+  margin-top:10px;
+  filter:drop-shadow(0 3px 4px rgba(0,0,0,.15));
+}
+
+.brand-text{
+  font-size:18px;
+  font-weight:800;
+  line-height:1.05;
+  margin-left:8px;
+}
+
 .menu{
-  margin-left:auto;display:flex;align-items:stretch;height:100%;
-  background:rgba(0,35,85,.25);border-radius:16px 16px 0 0
+  margin-left:auto;
+  display:flex;
+  align-items:stretch;
+  height:100%;
+  background:rgba(0,35,85,.25);
+  border-radius:16px 16px 0 0;
 }
+
 .menu a{
-  color:#fff;text-decoration:none;font-weight:700;
-  display:flex;align-items:center;gap:10px;padding:0 28px;position:relative
+  color:#fff;
+  text-decoration:none;
+  font-weight:700;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:0 28px;
+  position:relative;
 }
+
 .menu a.active:after{
-  content:"";position:absolute;bottom:0;left:0;right:0;height:5px;
-  background:var(--orange);border-radius:6px 6px 0 0
+  content:"";
+  position:absolute;
+  bottom:0;
+  left:0;
+  right:0;
+  height:5px;
+  background:var(--orange);
+  border-radius:6px 6px 0 0;
 }
-.menu-icon{font-size:25px}
-.hamb{font-size:38px;margin-left:12px;line-height:1}
+
+.menu-icon{
+  font-size:25px;
+}
+
+.hamb{
+  font-size:38px;
+  margin-left:12px;
+  line-height:1;
+}
+
+/* HERO */
 
 .hero{
-  max-width:1120px;margin:0 auto;padding:44px 24px 28px;text-align:left;color:#fff;
+  max-width:1120px;
+  margin:0 auto;
+  padding:44px 24px 28px;
+  text-align:left;
+  color:#fff;
 }
+
 .hero h1{
-  margin:0;font-size:48px;line-height:1.08;
-  text-shadow:0 3px 8px rgba(0,35,80,.2)
+  margin:0;
+  font-size:48px;
+  line-height:1.08;
+  text-shadow:0 3px 8px rgba(0,35,80,.2);
 }
-.hero h1 span{color:#63d7ff}
-.hero p{font-size:23px;margin:10px 0 0}
-.under{width:42px;height:4px;background:var(--orange);margin-top:10px;border-radius:5px}
+
+.hero h1 span{
+  color:#63d7ff;
+}
+
+.under{
+  width:42px;
+  height:4px;
+  background:var(--orange);
+  margin-top:10px;
+  border-radius:5px;
+}
+
+.hero p{
+  font-size:23px;
+  margin:10px 0 0;
+}
+
+/* RAPIDE / FIABLE / SIMPLE */
 
 .highlights{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:70px;
-  margin:24px auto 20px;max-width:1050px
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:70px;
+  margin:24px auto 20px;
+  max-width:1050px;
 }
-.highlight{display:flex;align-items:center;gap:15px;color:#fff}
+
+.highlight{
+  display:flex;
+  align-items:center;
+  gap:15px;
+  color:#fff;
+}
+
 .hl-icon{
-  width:58px;height:58px;border-radius:14px;background:rgba(30,130,225,.55);
-  display:flex;align-items:center;justify-content:center;font-size:31px
+  width:58px;
+  height:58px;
+  border-radius:14px;
+  background:rgba(30,130,225,.55);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:31px;
 }
-.highlight strong{font-size:20px;display:block}.highlight small{font-size:15px;display:block;margin-top:5px}
 
-main{max-width:1280px;margin:0 auto;padding:0 24px 30px}
+.highlight strong{
+  font-size:20px;
+  display:block;
+}
+
+.highlight small{
+  font-size:15px;
+  display:block;
+  margin-top:5px;
+}
+
+/* CALCULATEUR */
+
+main{
+  max-width:1280px;
+  margin:0 auto;
+  padding:0 24px 30px;
+}
+
 .calculator{
-  display:grid;grid-template-columns:1.25fr .95fr;gap:0;
-  background:rgba(255,255,255,.97);border-radius:20px;
-  box-shadow:0 12px 35px rgba(18,70,120,.13);overflow:hidden
+  display:grid;
+  grid-template-columns:1.25fr .95fr;
+  gap:0;
+  background:rgba(255,255,255,.97);
+  border-radius:20px;
+  box-shadow:0 12px 35px rgba(18,70,120,.13);
+  overflow:hidden;
 }
-.panel{padding:30px}
-.panel + .panel{border-left:1px solid #dbe9f6;background:rgba(245,250,255,.85)}
-.panel-title{display:flex;align-items:center;gap:15px;margin-bottom:20px}
-.panel-title .big-icon{
-  width:54px;height:54px;border-radius:15px;background:#096de0;color:#fff;
-  display:flex;align-items:center;justify-content:center;font-size:28px
-}
-.panel-title h2{margin:0;font-size:29px}
-.notice{
-  background:#e7f4ff;border-radius:12px;padding:12px 16px;color:#315277;
-  font-size:13px;line-height:1.35;margin-bottom:12px
-}
-.field{
-  display:grid;grid-template-columns:180px 1fr;align-items:center;gap:15px;margin:12px 0
-}
-.field label{font-weight:800;font-size:16px;display:flex;align-items:center;gap:12px}
-.field .fi{font-size:25px;width:30px;text-align:center}
-input,select{
-  width:100%;height:50px;border:1px solid #d0deea;border-radius:10px;
-  padding:0 17px;font-size:16px;color:#294669;background:#fff;outline:none
-}
-input:focus,select:focus{border-color:#1784df;box-shadow:0 0 0 3px rgba(23,132,223,.12)}
-.actions{margin-top:18px}
-button{
-  width:100%;border:0;border-radius:11px;height:56px;
-  font-size:19px;font-weight:800;cursor:pointer
-}
-.calculate{background:var(--orange);color:#fff;box-shadow:0 4px 8px rgba(255,101,0,.18)}
-.reset{margin-top:9px;background:#e3e9f0;color:#12386e}
-.error{min-height:22px;color:#b42318;font-weight:700;text-align:center;margin-top:9px}
 
-.result-card{height:100%;display:flex;flex-direction:column}
-.result-top{display:flex;align-items:center;gap:15px}
-.result-top .big-icon{background:#0871df}
+.panel{
+  padding:30px;
+}
+
+.panel + .panel{
+  border-left:1px solid #dbe9f6;
+  background:rgba(245,250,255,.85);
+}
+
+.panel-title{
+  display:flex;
+  align-items:center;
+  gap:15px;
+  margin-bottom:20px;
+}
+
+.panel-title .big-icon{
+  width:54px;
+  height:54px;
+  border-radius:15px;
+  background:#096de0;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:28px;
+}
+
+.panel-title h2{
+  margin:0;
+  font-size:29px;
+}
+
+.notice{
+  background:#e7f4ff;
+  border-radius:12px;
+  padding:12px 16px;
+  color:#315277;
+  font-size:13px;
+  line-height:1.35;
+  margin-bottom:12px;
+}
+
+/* CHAMPS */
+
+.field{
+  display:grid;
+  grid-template-columns:180px 1fr;
+  align-items:center;
+  gap:15px;
+  margin:12px 0;
+}
+
+.field label{
+  font-weight:800;
+  font-size:16px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.field .fi{
+  font-size:25px;
+  width:30px;
+  text-align:center;
+}
+
+input,
+select{
+  width:100%;
+  height:50px;
+  border:1px solid #d0deea;
+  border-radius:10px;
+  padding:0 17px;
+  font-size:16px;
+  color:#294669;
+  background:#fff;
+  outline:none;
+}
+
+input:focus,
+select:focus{
+  border-color:#1784df;
+  box-shadow:0 0 0 3px rgba(23,132,223,.12);
+}
+
+/* BOUTONS */
+
+.actions{
+  margin-top:18px;
+}
+
+button{
+  width:100%;
+  border:0;
+  border-radius:11px;
+  height:56px;
+  font-size:19px;
+  font-weight:800;
+  cursor:pointer;
+}
+
+.calculate{
+  background:var(--orange);
+  color:#fff;
+  box-shadow:0 4px 8px rgba(255,101,0,.18);
+}
+
+.reset{
+  margin-top:9px;
+  background:#e3e9f0;
+  color:#12386e;
+}
+
+.error{
+  min-height:22px;
+  color:#b42318;
+  font-weight:700;
+  text-align:center;
+  margin-top:9px;
+}
+
+/* RESULTAT */
+
+.result-card{
+  height:100%;
+  display:flex;
+  flex-direction:column;
+}
+
+.result-top{
+  display:flex;
+  align-items:center;
+  gap:15px;
+}
+
+.result-top .big-icon{
+  background:#0871df;
+}
+
 .result-box{
-  margin-top:4px;background:linear-gradient(180deg,#dff1ff,#f4faff);
-  border-radius:18px;padding:18px
+  margin-top:4px;
+  background:linear-gradient(180deg,#dff1ff,#f4faff);
+  border-radius:18px;
+  padding:18px;
 }
-.amount{text-align:center;font-size:54px;font-weight:900;color:#062e6c;margin:2px 0 16px}
-.details{background:rgba(255,255,255,.72);border-radius:15px;padding:5px 18px}
+
+.amount{
+  text-align:center;
+  font-size:54px;
+  font-weight:900;
+  color:#062e6c;
+  margin:2px 0 16px;
+}
+
+.details{
+  background:rgba(255,255,255,.72);
+  border-radius:15px;
+  padding:5px 18px;
+}
+
 .detail{
-  display:flex;justify-content:space-between;align-items:center;
-  padding:13px 0;border-bottom:1px solid #d7e6f3;font-size:17px
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:13px 0;
+  border-bottom:1px solid #d7e6f3;
+  font-size:17px;
 }
-.detail:last-child{border-bottom:0}.detail strong{font-size:17px}
+
+.detail:last-child{
+  border-bottom:0;
+}
+
+.detail strong{
+  font-size:17px;
+}
+
 .know{
-  margin-top:16px;background:#dff1ff;border-radius:15px;padding:17px 20px;
-  display:flex;gap:13px;color:#204775;line-height:1.45
+  margin-top:16px;
+  background:#dff1ff;
+  border-radius:15px;
+  padding:17px 20px;
+  display:flex;
+  gap:13px;
+  color:#204775;
+  line-height:1.45;
 }
-.know-icon{font-size:25px;color:#0871df}
+
+.know-icon{
+  font-size:25px;
+  color:#0871df;
+}
+
+/* CARTES DU BAS */
 
 .bottom-cards{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:18px
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+  margin-top:18px;
 }
-.bottom-card{
-  background:rgba(255,255,255,.94);border-radius:15px;padding:20px 25px;
-  display:flex;gap:15px;align-items:center;box-shadow:0 6px 20px rgba(20,70,120,.07)
-}
-.bottom-card .bc-icon{font-size:34px;color:#0871df}
-.bottom-card strong{display:block;font-size:17px}.bottom-card span{display:block;margin-top:4px;color:#4f6683}
 
-footer{text-align:center;padding:25px;color:#56718f;font-size:13px}
+.bottom-card{
+  background:rgba(255,255,255,.94);
+  border-radius:15px;
+  padding:20px 25px;
+  display:flex;
+  gap:15px;
+  align-items:center;
+  box-shadow:0 6px 20px rgba(20,70,120,.07);
+}
+
+.bottom-card .bc-icon{
+  font-size:34px;
+  color:#0871df;
+}
+
+.bottom-card strong{
+  display:block;
+  font-size:17px;
+}
+
+.bottom-card span{
+  display:block;
+  margin-top:4px;
+  color:#4f6683;
+}
+
+footer{
+  text-align:center;
+  padding:25px;
+  color:#56718f;
+  font-size:13px;
+}
+
+/* TELEPHONE */
 
 @media(max-width:900px){
-  .brand{min-width:150px}.brand-text{display:none}
-  .menu a{padding:0 15px}.menu-icon{font-size:20px}
-  .hero h1{font-size:37px}
-  .highlights{gap:20px}
-  .calculator{grid-template-columns:1fr}
-  .panel + .panel{border-left:0;border-top:1px solid #dbe9f6}
+
+  .brand{
+    min-width:150px;
+  }
+
+  .brand-text{
+    display:none;
+  }
+
+  .menu a{
+    padding:0 15px;
+  }
+
+  .hero h1{
+    font-size:37px;
+  }
+
+  .highlights{
+    gap:20px;
+  }
+
+  .calculator{
+    grid-template-columns:1fr;
+  }
+
+  .panel + .panel{
+    border-left:0;
+    border-top:1px solid #dbe9f6;
+  }
 }
+
 @media(max-width:650px){
-  .nav{height:72px;padding:0 12px}
-  .brand img{width:90px;height:68px}
-  .menu a{font-size:0;padding:0 10px}.menu-icon{font-size:23px}
-  .hamb{font-size:30px}
-  .hero{padding:30px 18px 20px}
-  .hero h1{font-size:31px}.hero p{font-size:17px}
-  .highlights{grid-template-columns:1fr;gap:12px}
-  main{padding:0 12px 25px}
-  .panel{padding:20px 15px}
-  .field{grid-template-columns:1fr;gap:7px}
-  .field label{margin-top:6px}
-  .bottom-cards{grid-template-columns:1fr}
+
+  .nav{
+    height:72px;
+    padding:0 12px;
+  }
+
+  .brand img{
+    width:90px;
+    height:68px;
+  }
+
+  .menu a{
+    font-size:0;
+    padding:0 10px;
+  }
+
+  .menu-icon{
+    font-size:23px;
+  }
+
+  .hamb{
+    font-size:30px;
+  }
+
+  .hero{
+    padding:30px 18px 20px;
+  }
+
+  .hero h1{
+    font-size:31px;
+  }
+
+  .hero p{
+    font-size:17px;
+  }
+
+  .highlights{
+    grid-template-columns:1fr;
+    gap:12px;
+  }
+
+  main{
+    padding:0 12px 25px;
+  }
+
+  .panel{
+    padding:20px 15px;
+  }
+
+  .field{
+    grid-template-columns:1fr;
+    gap:7px;
+  }
+
+  .field label{
+    margin-top:6px;
+  }
+
+  .bottom-cards{
+    grid-template-columns:1fr;
+  }
 }
 </style>
 </head>
+
 <body>
 
 <header>
-  <div class="nav">
-    <div class="brand">
-      <img src="logo-unsa-mobilites.png" alt="UNSA Mobilités">
-      <div class="brand-text">Ensemble<br>sur la route<br>de vos droits</div>
-    </div>
-    <nav class="menu">
-      <a class="active" href="#calculateur"><span class="menu-icon">▣</span>Calculateur TS</a>
-      <a href="#infos"><span class="menu-icon">ⓘ</span>Infos utiles</a>
-      <a href="#contact"><span class="menu-icon">✉</span>Contact</a>
-    </nav>
-    <div class="hamb">☰</div>
-  </div>
+
+<div class="nav">
+
+<div class="brand">
+
+<img src="logo-unsa-mobilites.png" alt="UNSA Mobilités">
+
+<div class="brand-text">
+Ensemble<br>
+sur la route<br>
+de vos droits
+</div>
+
+</div>
+
+<nav class="menu">
+
+<a class="active" href="#calculateur">
+<span class="menu-icon">▣</span>
+Calculateur TS
+</a>
+
+<a href="#infos">
+<span class="menu-icon">ⓘ</span>
+Infos utiles
+</a>
+
+<a href="#contact">
+<span class="menu-icon">✉</span>
+Contact
+</a>
+
+</nav>
+
+<div class="hamb">☰</div>
+
+</div>
+
 </header>
 
-<section class="hero">
-  <h1>Calculateur TS – <span>UNSA Mobilités</span></h1>
-  <div class="under"></div>
-  <p>Calculez rapidement et facilement le montant de votre Travail Supplémentaire</p>
 
-  <div class="highlights">
-    <div class="highlight"><div class="hl-icon">⚡</div><div><strong>Rapide</strong><small>Résultat immédiat</small></div></div>
-    <div class="highlight"><div class="hl-icon">✓</div><div><strong>Fiable</strong><small>Selon votre grille de rémunération</small></div></div>
-    <div class="highlight"><div class="hl-icon">👥</div><div><strong>Simple</strong><small>Pour tous les agents</small></div></div>
-  </div>
+<section class="hero">
+
+<h1>
+Calculateur TS – <span>UNSA Mobilités</span>
+</h1>
+
+<div class="under"></div>
+
+<p>
+Calculez rapidement et facilement le montant de votre Travail Supplémentaire
+</p>
+
+
+<div class="highlights">
+
+<div class="highlight">
+
+<div class="hl-icon">⚡</div>
+
+<div>
+<strong>Rapide</strong>
+<small>Résultat immédiat</small>
+</div>
+
+</div>
+
+
+<div class="highlight">
+
+<div class="hl-icon">✓</div>
+
+<div>
+<strong>Fiable</strong>
+<small>Selon votre grille de rémunération</small>
+</div>
+
+</div>
+
+
+<div class="highlight">
+
+<div class="hl-icon">👥</div>
+
+<div>
+<strong>Simple</strong>
+<small>Pour tous les agents</small>
+</div>
+
+</div>
+
+</div>
+
 </section>
 
+
 <main id="calculateur">
-  <div class="calculator">
-    <section class="panel">
-      <div class="panel-title">
-        <div class="big-icon">▦</div><h2>Vos informations</h2>
-      </div>
 
-      <div class="notice">ⓘ &nbsp;Le calcul est basé sur la grille de rémunération applicable selon votre BC, échelon et le choix de compensation.</div>
+<div class="calculator">
 
-      <div class="field">
-        <label><span class="fi">◷</span>TS (minutes) *</label>
-        <div><input id="minutes" type="number" min="1" step="1" placeholder="Entrez le nombre de minutes"></div>
-      </div>
-      <div class="field">
-        <label><span class="fi">♟</span>BC *</label>
-        <div><select id="bc"><option value="">Sélectionnez votre BC</option></select></div>
-      </div>
-      <div class="field">
-        <label><span class="fi">▮▮▮</span>Échelon *</label>
-        <div><select id="echelon" disabled><option value="">Sélectionnez votre échelon</option></select></div>
-      </div>
-      <div class="field">
-        <label><span class="fi">◉</span>Compensation *</label>
-        <div><select id="compensation"><option value="">Sélectionnez une option</option><option value="oui">Avec compensation</option><option value="non">Sans compensation</option></select></div>
-      </div>
 
-      <div class="actions">
-        <button class="calculate" onclick="calculer()">▦ &nbsp; Calculer le montant</button>
-        <button class="reset" onclick="resetForm()">↻ &nbsp; Réinitialiser</button>
-      </div>
-      <div id="error" class="error"></div>
-    </section>
+<!-- GAUCHE -->
 
-    <section class="panel result-card">
-      <div class="panel-title">
-        <div class="big-icon">€</div><h2>Résultat</h2>
-      </div>
+<section class="panel">
 
-      <div class="result-box">
-        <div id="amount" class="amount">- €</div>
-        <div class="details">
-          <div class="detail"><span>◷ &nbsp; Minutes TS</span><strong id="rMinutes">- min</strong></div>
-          <div class="detail"><span>⌛ &nbsp; Heures équivalentes</span><strong id="rHours">- h - min</strong></div>
-          <div class="detail"><span>▦ &nbsp; Tarif appliqué</span><strong id="rate">- €/min</strong></div>
-          <div class="detail"><span>◉ &nbsp; Montant brut estimé</span><strong id="rAmount">- €</strong></div>
-        </div>
-      </div>
+<div class="panel-title">
 
-      <div class="know">
-        <div class="know-icon">ⓘ</div>
-        <div><strong>À savoir</strong><br>Le calcul est basé sur la grille de rémunération applicable selon votre BC, échelon et le choix de compensation.</div>
-      </div>
-    </section>
-  </div>
+<div class="big-icon">▦</div>
 
-  <div class="bottom-cards" id="infos">
-    <div class="bottom-card"><div class="bc-icon">▤</div><div><strong>Grille de rémunération</strong><span>Calcul conforme aux règles en vigueur</span></div></div>
-    <div class="bottom-card"><div class="bc-icon">✓</div><div><strong>Données confidentielles</strong><span>Aucune information n'est enregistrée</span></div></div>
-    <div class="bottom-card" id="contact"><div class="bc-icon">👥</div><div><strong>Un outil UNSA Mobilités</strong><span>Pour vous accompagner au quotidien</span></div></div>
-  </div>
+<h2>Vos informations</h2>
+
+</div>
+
+
+<div class="notice">
+
+ⓘ &nbsp;
+Le calcul est basé sur la grille de rémunération applicable selon votre BC, échelon et le choix de compensation.
+
+</div>
+
+
+<!-- MINUTES -->
+
+<div class="field">
+
+<label>
+<span class="fi">◷</span>
+TS (minutes) *
+</label>
+
+<div>
+
+<input
+id="minutes"
+type="number"
+min="1"
+step="1"
+placeholder="Entrez le nombre de minutes"
+>
+
+</div>
+
+</div>
+
+
+<!-- BC -->
+
+<div class="field">
+
+<label>
+<span class="fi">♟</span>
+BC *
+</label>
+
+<div>
+
+<select id="bc">
+
+<option value="">
+Sélectionnez votre BC
+</option>
+
+</select>
+
+</div>
+
+</div>
+
+
+<!-- ECHELON -->
+
+<div class="field">
+
+<label>
+<span class="fi">▮▮▮</span>
+Échelon *
+</label>
+
+<div>
+
+<select id="echelon" disabled>
+
+<option value="">
+Sélectionnez votre échelon
+</option>
+
+</select>
+
+</div>
+
+</div>
+
+
+<!-- COMPENSATION -->
+
+<div class="field">
+
+<label>
+<span class="fi">◉</span>
+Compensation *
+</label>
+
+<div>
+
+<select id="compensation">
+
+<option value="">
+Sélectionnez une option
+</option>
+
+<option value="oui">
+Avec compensation
+</option>
+
+<option value="non">
+Sans compensation
+</option>
+
+</select>
+
+</div>
+
+</div>
+
+
+<div class="actions">
+
+<button
+class="calculate"
+onclick="calculer()"
+>
+▦ &nbsp; Calculer le montant
+</button>
+
+
+<button
+class="reset"
+onclick="resetForm()"
+>
+↻ &nbsp; Réinitialiser
+</button>
+
+</div>
+
+
+<div
+id="error"
+class="error"
+></div>
+
+</section>
+
+
+<!-- DROITE -->
+
+<section class="panel result-card">
+
+<div class="panel-title">
+
+<div class="big-icon">
+€
+</div>
+
+<h2>Résultat</h2>
+
+</div>
+
+
+<div class="result-box">
+
+<div
+id="amount"
+class="amount"
+>
+- €
+</div>
+
+
+<div class="details">
+
+
+<div class="detail">
+
+<span>
+◷ &nbsp; Minutes TS
+</span>
+
+<strong id="rMinutes">
+- min
+</strong>
+
+</div>
+
+
+<div class="detail">
+
+<span>
+⌛ &nbsp; Heures équivalentes
+</span>
+
+<strong id="rHours">
+- h - min
+</strong>
+
+</div>
+
+
+<div class="detail">
+
+<span>
+▦ &nbsp; Tarif appliqué
+</span>
+
+<strong id="rate">
+- €/min
+</strong>
+
+</div>
+
+
+<div class="detail">
+
+<span>
+◉ &nbsp; Montant brut estimé
+</span>
+
+<strong id="rAmount">
+- €
+</strong>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+<div class="know">
+
+<div class="know-icon">
+ⓘ
+</div>
+
+<div>
+
+<strong>À savoir</strong>
+
+<br>
+
+Le calcul est basé sur la grille de rémunération applicable selon votre BC, échelon et le choix de compensation.
+
+</div>
+
+</div>
+
+</section>
+
+</div>
+
+
+<!-- CARTES BAS -->
+
+<div
+class="bottom-cards"
+id="infos"
+>
+
+
+<div class="bottom-card">
+
+<div class="bc-icon">
+▤
+</div>
+
+<div>
+
+<strong>
+Grille de rémunération
+</strong>
+
+<span>
+Calcul conforme aux règles en vigueur
+</span>
+
+</div>
+
+</div>
+
+
+<div class="bottom-card">
+
+<div class="bc-icon">
+✓
+</div>
+
+<div>
+
+<strong>
+Données confidentielles
+</strong>
+
+<span>
+Aucune information n'est enregistrée
+</span>
+
+</div>
+
+</div>
+
+
+<div
+class="bottom-card"
+id="contact"
+>
+
+<div class="bc-icon">
+👥
+</div>
+
+<div>
+
+<strong>
+Un outil UNSA Mobilités
+</strong>
+
+<span>
+Pour vous accompagner au quotidien
+</span>
+
+</div>
+
+</div>
+
+
+</div>
+
 </main>
 
-<footer>Calculateur TS – UNSA Mobilités</footer>
+
+<footer>
+
+Calculateur TS – UNSA Mobilités
+
+</footer>
+
 
 <script>
-/*
-  VERSION TEST
-  Tarifs confirmés actuellement.
-  Chaque tarif correspond à 1 minute.
-  Les combinaisons non encore confirmées restent volontairement absentes.
-*/
-const tarifs = {
-  1:{
-    2:{oui:0.34,non:0.29},
-    3:{oui:0.34,non:0.29},
-    4:{oui:0.35,non:0.30},
-    5:{oui:0.35,non:0.30},
-    6:{oui:0.36,non:0.31},
-    7:{oui:0.36,non:0.31},
-    8:{oui:0.37,non:0.32}
-  },
-  2:{
-    2:{oui:0.35,non:0.30},
-    3:{oui:0.35,non:0.30},
-    4:{oui:0.36,non:0.31},
-    5:{oui:0.36,non:0.31},
-    6:{oui:0.37,non:0.32},
-    7:{oui:0.37,non:0.32},
-    8:{oui:0.38,non:0.33}
-  },
 
-  /* Tarifs ponctuellement confirmés précédemment */
-  3:{2:{oui:0.35,non:0.30}},
-  4:{2:{oui:0.37,non:0.32},11:{oui:0.41,non:0.36}},
-  5:{2:{oui:0.38,non:0.33},11:{oui:0.42,non:0.38}},
-  6:{3:{oui:0.39,non:0.34},11:{oui:0.43,non:0.38}},
-  7:{4:{oui:0.40,non:0.35},11:{oui:0.44,non:0.39}},
-  8:{4:{oui:0.41,non:0.36},11:{oui:0.46,non:0.41}}
+/*
+====================================================
+TARIFS
+====================================================
+
+Chaque tarif correspond à 1 MINUTE.
+
+Les tarifs non encore confirmés restent absents
+afin de ne jamais inventer un montant.
+*/
+
+
+const tarifs = {
+
+
+/* =========================
+   BC 1
+========================= */
+
+1:{
+
+2:{
+oui:0.34,
+non:0.29
+},
+
+3:{
+oui:0.34,
+non:0.29
+},
+
+4:{
+oui:0.35,
+non:0.30
+},
+
+5:{
+oui:0.35,
+non:0.30
+},
+
+6:{
+oui:0.36,
+non:0.31
+},
+
+7:{
+oui:0.36,
+non:0.31
+},
+
+8:{
+oui:0.37,
+non:0.32
+}
+
+},
+
+
+/* =========================
+   BC 2
+========================= */
+
+2:{
+
+2:{
+oui:0.35,
+non:0.30
+},
+
+3:{
+oui:0.35,
+non:0.30
+},
+
+4:{
+oui:0.36,
+non:0.31
+},
+
+5:{
+oui:0.36,
+non:0.31
+},
+
+6:{
+oui:0.37,
+non:0.32
+},
+
+7:{
+oui:0.37,
+non:0.32
+},
+
+8:{
+oui:0.38,
+non:0.33
+}
+
+},
+
+
+/* =========================
+   BC 3
+========================= */
+
+3:{
+
+2:{
+oui:0.35,
+non:0.30
+}
+
+},
+
+
+/* =========================
+   BC 4
+========================= */
+
+4:{
+
+2:{
+oui:0.37,
+non:0.32
+},
+
+11:{
+oui:0.41,
+non:0.36
+}
+
+},
+
+
+/* =========================
+   BC 5
+========================= */
+
+5:{
+
+2:{
+oui:0.38,
+non:0.33
+},
+
+11:{
+oui:0.42,
+non:0.38
+}
+
+},
+
+
+/* =========================
+   BC 6
+========================= */
+
+6:{
+
+3:{
+oui:0.39,
+non:0.34
+},
+
+11:{
+oui:0.43,
+non:0.38
+}
+
+},
+
+
+/* =========================
+   BC 7
+========================= */
+
+7:{
+
+4:{
+oui:0.40,
+non:0.35
+},
+
+11:{
+oui:0.44,
+non:0.39
+}
+
+},
+
+
+/* =========================
+   BC 8
+========================= */
+
+8:{
+
+4:{
+oui:0.41,
+non:0.36
+},
+
+11:{
+oui:0.46,
+non:0.41
+}
+
+}
+
 };
 
-const bc = document.getElementById("bc");
-const echelon = document.getElementById("echelon");
+
+/* =========================
+   ELEMENTS
+========================= */
+
+const bc =
+document.getElementById("bc");
+
+const echelon =
+document.getElementById("echelon");
+
+
+/* =========================
+   BC 1 À 8
+========================= */
 
 for(let i=1;i<=8;i++){
-  const option=document.createElement("option");
-  option.value=i;
-  option.textContent="BC "+i;
-  bc.appendChild(option);
+
+const option =
+document.createElement("option");
+
+option.value=i;
+
+option.textContent="BC "+i;
+
+bc.appendChild(option);
+
 }
+
+
+/* =========================
+   CHANGEMENT DE BC
+========================= */
 
 bc.addEventListener("change",()=>{
-  const value=bc.value;
-  echelon.innerHTML="";
-  echelon.disabled=true;
 
-  if(!value){
-    echelon.innerHTML='<option value="">Sélectionnez votre échelon</option>';
-    return;
-  }
+const value=bc.value;
 
-  const echelons=Object.keys(tarifs[value]||{}).map(Number).sort((a,b)=>a-b);
+echelon.innerHTML="";
 
-  if(!echelons.length){
-    echelon.innerHTML='<option value="">Tarifs à définir</option>';
-    return;
-  }
+echelon.disabled=true;
 
-  echelon.innerHTML='<option value="">Sélectionnez votre échelon</option>';
-  echelons.forEach(e=>{
-    const option=document.createElement("option");
-    option.value=e;
-    option.textContent="Échelon "+e;
-    echelon.appendChild(option);
-  });
-  echelon.disabled=false;
+
+if(!value){
+
+echelon.innerHTML=
+'<option value="">Sélectionnez votre échelon</option>';
+
+return;
+
+}
+
+
+const echelons=
+Object.keys(
+tarifs[value] || {}
+)
+.map(Number)
+.sort(
+(a,b)=>a-b
+);
+
+
+if(!echelons.length){
+
+echelon.innerHTML=
+'<option value="">Tarifs à définir</option>';
+
+return;
+
+}
+
+
+echelon.innerHTML=
+'<option value="">Sélectionnez votre échelon</option>';
+
+
+echelons.forEach(e=>{
+
+const option=
+document.createElement("option");
+
+option.value=e;
+
+option.textContent=
+"Échelon "+e;
+
+echelon.appendChild(option);
+
 });
 
+
+echelon.disabled=false;
+
+});
+
+
+/* =========================
+   FORMAT EURO
+========================= */
+
 function formatEuro(n){
-  return n.toLocaleString("fr-FR",{minimumFractionDigits:2,maximumFractionDigits:2})+" €";
+
+return n.toLocaleString(
+"fr-FR",
+{
+minimumFractionDigits:2,
+maximumFractionDigits:2
 }
+)+" €";
+
+}
+
+
+/* =========================
+   FORMAT TARIF
+========================= */
 
 function formatRate(n){
-  return n.toLocaleString("fr-FR",{minimumFractionDigits:2,maximumFractionDigits:6})+" €/min";
+
+return n.toLocaleString(
+"fr-FR",
+{
+minimumFractionDigits:2,
+maximumFractionDigits:6
 }
+)+" €/min";
+
+}
+
+
+/* =========================
+   HEURES
+========================= */
 
 function formatHours(minutes){
-  const h=Math.floor(minutes/60);
-  const m=minutes%60;
-  return h+" h "+m.toString().padStart(2,"0")+" min";
+
+const h=
+Math.floor(minutes/60);
+
+const m=
+minutes%60;
+
+return h+
+" h "+
+m.toString().padStart(2,"0")+
+" min";
+
 }
+
+
+/* =========================
+   CALCUL
+========================= */
 
 function calculer(){
-  const minutes=Number(document.getElementById("minutes").value);
-  const bcValue=bc.value;
-  const echelonValue=echelon.value;
-  const compensation=document.getElementById("compensation").value;
-  const error=document.getElementById("error");
 
-  error.textContent="";
+const minutes=
+Number(
+document.getElementById("minutes").value
+);
 
-  if(!Number.isInteger(minutes)||minutes<=0){
-    error.textContent="Veuillez saisir un nombre entier de minutes supérieur à 0.";
-    return;
-  }
-  if(!bcValue||!echelonValue||!compensation){
-    error.textContent="Veuillez remplir tous les champs.";
-    return;
-  }
+const bcValue=
+bc.value;
 
-  const tarif=tarifs[bcValue]?.[echelonValue]?.[compensation];
+const echelonValue=
+echelon.value;
 
-  if(typeof tarif!=="number"){
-    error.textContent="Le tarif de cette combinaison n'est pas encore renseigné.";
-    return;
-  }
+const compensation=
+document.getElementById("compensation").value;
 
-  const montant=minutes*tarif;
+const error=
+document.getElementById("error");
 
-  document.getElementById("amount").textContent=formatEuro(montant);
-  document.getElementById("rAmount").textContent=formatEuro(montant);
-  document.getElementById("rMinutes").textContent=minutes.toLocaleString("fr-FR")+" min";
-  document.getElementById("rHours").textContent=formatHours(minutes);
-  document.getElementById("rate").textContent=formatRate(tarif);
+
+error.textContent="";
+
+
+/* Vérification minutes */
+
+if(
+!Number.isInteger(minutes) ||
+minutes<=0
+){
+
+error.textContent=
+"Veuillez saisir un nombre entier de minutes supérieur à 0.";
+
+return;
+
 }
+
+
+/* Vérification champs */
+
+if(
+!bcValue ||
+!echelonValue ||
+!compensation
+){
+
+error.textContent=
+"Veuillez remplir tous les champs.";
+
+return;
+
+}
+
+
+/* Recherche tarif */
+
+const tarif=
+tarifs[bcValue]
+?.[echelonValue]
+?.[compensation];
+
+
+if(typeof tarif!=="number"){
+
+error.textContent=
+"Le tarif de cette combinaison n'est pas encore renseigné.";
+
+return;
+
+}
+
+
+/* Calcul */
+
+const montant=
+minutes*tarif;
+
+
+/* Affichage */
+
+document.getElementById("amount")
+.textContent=
+formatEuro(montant);
+
+
+document.getElementById("rAmount")
+.textContent=
+formatEuro(montant);
+
+
+document.getElementById("rMinutes")
+.textContent=
+minutes.toLocaleString("fr-FR")
++" min";
+
+
+document.getElementById("rHours")
+.textContent=
+formatHours(minutes);
+
+
+document.getElementById("rate")
+.textContent=
+formatRate(tarif);
+
+}
+
+
+/* =========================
+   RESET
+========================= */
 
 function resetForm(){
-  document.getElementById("minutes").value="";
-  bc.value="";
-  echelon.innerHTML='<option value="">Sélectionnez votre échelon</option>';
-  echelon.disabled=true;
-  document.getElementById("compensation").value="";
-  document.getElementById("error").textContent="";
-  document.getElementById("amount").textContent="- €";
-  document.getElementById("rMinutes").textContent="- min";
-  document.getElementById("rHours").textContent="- h - min";
-  document.getElementById("rate").textContent="- €/min";
-  document.getElementById("rAmount").textContent="- €";
+
+document.getElementById("minutes")
+.value="";
+
+
+bc.value="";
+
+
+echelon.innerHTML=
+'<option value="">Sélectionnez votre échelon</option>';
+
+echelon.disabled=true;
+
+
+document.getElementById("compensation")
+.value="";
+
+
+document.getElementById("error")
+.textContent="";
+
+
+document.getElementById("amount")
+.textContent="- €";
+
+
+document.getElementById("rMinutes")
+.textContent="- min";
+
+
+document.getElementById("rHours")
+.textContent="- h - min";
+
+
+document.getElementById("rate")
+.textContent="- €/min";
+
+
+document.getElementById("rAmount")
+.textContent="- €";
+
 }
+
 </script>
+
 </body>
 </html>
-
-
